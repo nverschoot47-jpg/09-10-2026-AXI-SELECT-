@@ -88,17 +88,13 @@ const FIRMS = {
   // hier terugkomen vóórdat hij mag vuren.
   vantage: {
     label: 'Vantage',
+    // Nieuwe broker-accounts: alleen de vier .sa (cash CFD) symbolen.
+    // Suffix moet EXACT kloppen met MT5. Tickers links = wat TradingView stuurt.
     symbols: {
-      'MGC1!': 'XAUUSD',    // Micro Gold
-      'MNQ1!': 'NAS100',    // Micro Nasdaq
-      'SIL1!': 'XAGUSD',    // Micro Silver
-      'MCL1!': 'CL-OIL',    // Micro WTI  -> future-CFD, kleinste basis
-      'BTCUSD': 'BTCUSD',   // Bitcoin  — 1-op-1, geen futures-omweg
-      'ETHUSD': 'ETHUSD',   // Ethereum — 1-op-1, geen futures-omweg
-      'XRPUSD': 'XRPUSD',   // Ripple   — 1-op-1, geen futures-omweg
-      'SOLUSD': 'SOLUSD',   // Solana   — 1-op-1, geen futures-omweg
-      'GER40': 'GER40',     // DAX
-      'UK100': 'UK100',     // FTSE 100
+      'MGC1!':  'XAUUSD.sa',   // Gold
+      'MNQ1!':  'USTECH.sa',   // US Tech 100 (Nasdaq)
+      'GER40':  'GER40.sa',    // DAX
+      'UK100':  'UK100.sa',    // FTSE 100
     },
   },
 };
@@ -184,6 +180,15 @@ export const SPECS = {
 
   GER40:    spec({ contract:    1, digits: 2, valuta: 'EUR', volMin: 0.10, volMax: 500, volStep: 0.10 }),
   UK100:    spec({ contract:    1, digits: 2, valuta: 'GBP', volMin: 0.10, volMax: 500, volStep: 0.10 }),
+
+  // ── Vantage .sa (cash CFD) — afgelezen uit MT5, okt 2026 ─────────────────
+  // LET OP: volMax van USTECH.sa en de volStep van de drie indices stonden niet
+  // volledig op de screenshots. Waarden hieronder zijn aangenomen; verifySpecs()
+  // meldt bij het opstarten precies welke afwijken, pas die dan hier aan.
+  'XAUUSD.sa': spec({ contract: 100, digits: 2, valuta: 'USD', volMin: 0.01, volMax:  20, volStep: 0.01 }),
+  'USTECH.sa': spec({ contract:   1, digits: 2, valuta: 'USD', volMin: 0.10, volMax: 250, volStep: 0.10 }), // volMax/volStep nog checken
+  'GER40.sa':  spec({ contract:   1, digits: 2, valuta: 'EUR', volMin: 0.10, volMax: 250, volStep: 0.10 }), // volStep nog checken
+  'UK100.sa':  spec({ contract:   1, digits: 2, valuta: 'GBP', volMin: 0.10, volMax: 250, volStep: 0.10 }), // volStep nog checken
 };
 
 
